@@ -1,4 +1,4 @@
-![katoolin](https://cloud.githubusercontent.com/assets/8742190/9415562/83397aae-4840-11e5-8f72-28dfffcc70a9.png)
+![katoolinv2](https://user-images.githubusercontent.com/10264942/51780243-46586380-210d-11e9-9bc1-1c6bf66f8e5d.png)
 # katoolin V2
 Command line interface (CLI) to install Kali Linux Tools in your desired distribution.
 
