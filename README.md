@@ -1,47 +1,43 @@
 ![katoolin](https://cloud.githubusercontent.com/assets/8742190/9415562/83397aae-4840-11e5-8f72-28dfffcc70a9.png)
-# katoolin
-Automatically install all Kali linux tools
+# katoolin V2
+Command line interface (CLI) to install Kali Linux Tools in your desired distribution.
 
-# Features
-- Add Kali linux repositories
-- Remove kali linux repositories
-- Install Kali linux tools
+# Why?
+Everybody should be capable of using his/her preferred distribution with his/her desired toolset.
 
-# Requirements
-- Python 2.7
-- An operating system (tested on Ubuntu)
+# HowTo
 
-# Installation
-- sudo su
-- git clone https://github.com/LionSec/katoolin.git && cp katoolin/katoolin.py /usr/bin/katoolin
-- chmod +x /usr/bin/katoolin
-- sudo katoolin 
+## Operating System
+Pick your preferred operating system you want to deal with.
+The katoolin toolset and setup-helper is versatile and tries to fit all your needs.
 
-# Video
-https://www.youtube.com/watch?v=8VxCWVoZEEE
+## Tested
+- Ubuntu 18.04
+- Debian Stretch
+- Linux Mint
+
+## Built-In-Preparation
+- Setup required Python (2.7)
+- Initialising trusted keys for Kali's repositories
+- Add Kali (rolling) repositories
+- Setup apt-fast for accelerated bulk installations
+- Installs as command 'katoolin'
+
+## Installation
+$ wget -O katoolin.zip https://github.com/mko-x/katoolin/releases/latest
+
 
 # Usage
-- Typing the number of a tool will install it
-- Typing 0 will install all Kali Linux tools
+- start/run: katoolin
+- 1-99: Choose a listed category
+- 1-99: Choose a listed tool
+- 0 in Category installs all of its tools
+- 0 at home installs all tools of all categories at once (Be careful with size, traffic and time)
 - back : Go back
 - gohome : Go to the main menu
-- By installing armitage , you will install metasploit
 
 # Warning
-Before updating your system , please remove all Kali-linux repositories to avoid any kind of problem .
+Before updating your base system, ensure to remove all Kali Linux repositories if you want to avoid any kind of update problem.
 
-# I have some questions!
-
-Please visit https://github.com/LionSec/katoolin/issues
-
-# Donations
-- Paypal : https://www.paypal.me/lionsec
-- skrill : informatica98es@gmail.com
-
-
-# Contact
-- Website : http://lionsec.net
-- Youtube : https://youtube.com/inf98es
-- Facebook : https://facebook.com/in98
-- Twitter: @LionSec1
-- Email : informatica98es@gmail.com
+# Problems? Questions? Improvements?
+- https://github.com/mko-x/katoolin/issues
