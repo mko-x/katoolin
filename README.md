@@ -43,6 +43,9 @@ $ sudo ./install.sh
 - bulk imnstall via zero (0) code (may last some time depending on your connection)
 - bulk remove
 
+# Hint
+- some scripts, apps, software elements need interactive decisions, so at the moment this install is not totally automisable
+
 ## Warning
 Before updating your base system, ensure to remove all Kali Linux repositories if you want to avoid any kind of update problem.
 
