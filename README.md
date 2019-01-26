@@ -23,12 +23,13 @@ The katoolin toolset and setup-helper is versatile and tries to fit all your nee
 - Setup apt-fast for accelerated bulk installations
 - Installs as command 'katoolin'
 
-## Installation
-$ wget -O katoolin.zip https://github.com/mko-x/katoolin/releases/latest
-
+# Installation
+$ wget https://github.com/mko-x/katoolin/releases/download/2.0/katoolin-V2-alpha.zip
+$ unzip katoolin-V2-alpha.zip
+$ sudo ./install.sh
 
 # Usage
-- start/run: katoolin
+- start/run: $ sudo katoolin
 - 1-99: Choose a listed category
 - 1-99: Choose a listed tool
 - 0 in Category installs all of its tools
@@ -36,7 +37,7 @@ $ wget -O katoolin.zip https://github.com/mko-x/katoolin/releases/latest
 - back : Go back
 - gohome : Go to the main menu
 
-# Warning
+## Warning
 Before updating your base system, ensure to remove all Kali Linux repositories if you want to avoid any kind of update problem.
 
 # Problems? Questions? Improvements?
