@@ -9,8 +9,22 @@ echo "#Start..."
 
 PYTHON=/usr/local/bin/python
 
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+   PYTHON=/usr/bin
+elif [[ "$unamestr" == 'darwin' ]]; then
+   platform='osx'
+fi
+
+
 PYTHON_OK=`$PYTHON -c 'import sys
 print (sys.version_info >= (2, 7) and "1" or "0")'`
+
+if [ "$platform" = 'Linux' ]; then
+    PYTHON_OK='99'
+fi
 
 if [ "$PYTHON_OK" = '0' ]; then
     echo "Python version too old"
@@ -23,6 +37,7 @@ if [ "$PYTHON_OK" = '0' ]; then
 	./configure --enable-optimizations
 	make altinstall
 else
+    apt-get install python
     echo "python ok: $PYTHON_OK"
 fi
 
