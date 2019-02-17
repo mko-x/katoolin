@@ -1,16 +1,16 @@
 #!/bin/bash
 
+echo "uninstall:start"
+
 if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
+  then echo "uninstall: Please run as root"
   exit
 fi
 
-echo "#Start by using katoolin and choose remove repositories and installs."
-
-bash ./usr/bin/katoolin &
-
-read
-
+echo "uninstall:rm katoolin" 
 rm -f /usr/bin/katoolin
 
-echo "...Fin#"
+echo "uninstall:autoremove"
+apt-get -qq --purge autoremove -y
+
+echo "uninstall:finish"
