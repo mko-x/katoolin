@@ -55,3 +55,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# katoolin local downloads
+bing-ip2hosts-*.tar.gz
+bing-ip2hosts-*
