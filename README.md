@@ -1,23 +1,23 @@
 ![katoolinv2](https://user-images.githubusercontent.com/10264942/51780243-46586380-210d-11e9-9bc1-1c6bf66f8e5d.png)
-# katoolin V2
+# katoolin 
 Command line interface (CLI) to install Kali Linux Tools in your desired distribution.
 
 # Why?
-Everybody should be capable of using his/her preferred distribution with his/her desired toolset.
+Provide Kali Linux Tools to other distributions than Kali itself.
 
 # HowTo
-
 ## Operating System
 Pick your preferred operating system you want to deal with.
 The katoolin toolset and setup-helper is versatile and tries to fit all your needs.
 
 ## Tested
-- Ubuntu 18.04
-- Debian Stretch
-- Linux Mint
+- Ubuntu 18.04 (native and vbox)
+- Debian Stretch (native and vbox)
+- Linux Mint (vbox)
+- Raspbian (vbox created from PiDesktop release:2018-11-26 kernel:4.9)
 
 ## Built-In-Preparation
-- Setup required Python (2.7)
+- Setup required Python (stick to 2.7)
 - Initialising trusted keys for Kali's repositories
 - Add Kali (rolling) repositories
 - Setup apt-fast for accelerated bulk installations
