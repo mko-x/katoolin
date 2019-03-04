@@ -24,9 +24,9 @@ The katoolin toolset and setup-helper is versatile and tries to fit all your nee
 - Installs as command 'katoolin'
 
 # Installation
-$ wget https://github.com/mko-x/katoolin/releases/download/2.0/katoolin-V2-alpha.zip
+$ wget https://github.com/mko-x/katoolin/releases/download/support-raspbian/katoolin.zip
 
-$ unzip katoolin-V2-alpha.zip
+$ unzip katoolin.zip
 
 $ sudo ./install.sh
 
