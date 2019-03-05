@@ -24,7 +24,7 @@ The katoolin toolset and setup-helper is versatile and tries to fit all your nee
 - Installs as command 'katoolin'
 
 # Installation
-$ wget https://github.com/mko-x/katoolin/releases/download/support-raspbian/katoolin.zip
+$ wget https://git.io/fhxF5 -O katoolin.zip
 
 $ unzip katoolin.zip
 
@@ -40,7 +40,7 @@ $ sudo ./install.sh
 - gohome : Go to the main menu
 
 # Features
-- bulk imnstall via zero (0) code (may last some time depending on your connection)
+- bulk install via zero (0) code (may last some time depending on your connection)
 - bulk remove
 
 # Hint
