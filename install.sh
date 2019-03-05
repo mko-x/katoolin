@@ -10,7 +10,7 @@ fi
 export PYTHON_DOWNLOAD_VERSION="2.7.15-8"
 export PYTHON_PACKAGE_VERSION="2.7"
 export PYTHON_VERSION_TARGET="Python 2.7.15+"
-export PYTHON="/usr/bin/python"
+export PYTHON="/usr/bin/python${PYTHON_PACKAGE_VERSION}"
 
 echo "install:platform detection"
 
@@ -30,10 +30,12 @@ installed_python_version="python --version"
 if [[ "$installed_python_version" == ${PYTHON_VERSION_TARGET} ]]; then
    export PYTHON_VERSION_TARGET_INSTALLED=${PYTHON_VERSION_TARGET}
 else
-    apt-get install python2.7
+    apt-get install "python${PYTHON_PACKAGE_VERSION}"
 fi
+
 PYTHON_OK=`$PYTHON -c 'import sys
 print (sys.version_info >= (2, 7) and "1" or "0")'`
+echo "python ok status value: ${PYTHON_OK}"
 
 if [ "$platform" = 'Linux' ]; then
     PYTHON_OK='99'
@@ -68,4 +70,4 @@ cp ./katoolin.py /usr/bin/katoolin
 chmod +x /usr/bin/katoolin
 
 echo "Fin"
-echo "Run katoolin just from terminal e.g. by callin katoolin"
+echo "Run katoolin just from terminal e.g. by calling katoolin"
