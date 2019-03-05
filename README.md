@@ -7,8 +7,10 @@ Provide Kali Linux Tools to other linux distributions.
 
 # Quickstart
 ```bash
-
-``
+mkdir ~/_katemp && cd ~/_katemp && \
+wget https://git.io/fhxF5 -O katoolin.zip && unzip katoolin.zip && sudo ./install.sh && \
+cd ~/ && rm -rf ~/_katemp
+```
 
 # Features
 - Install script
@@ -43,10 +45,8 @@ The following tasks can be executed in setup menu:
 # Installation
 ```bash
 wget https://git.io/fhxF5 -O katoolin.zip
-
-$ unzip katoolin.zip
-
-$ sudo ./install.sh
+unzip katoolin.zip
+sudo ./install.sh
 ```
 
 # Usage
