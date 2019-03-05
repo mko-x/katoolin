@@ -27,8 +27,8 @@ class UI:
 
     def printMainMenu(self):
         print ('''
-    1) Adding, removing and updating Kali repositories 
-    2) Show categories
+    1) Setup: Adding, removing and updating Kali repositories 
+    2) Start: Show all categories
 
     0) Help
 
