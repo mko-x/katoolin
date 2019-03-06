@@ -1,20 +1,20 @@
 #!/bin/bash
 set -ex
 
-BUILD_FOLDER_PATH="./build"
+BUILD_FOLDER_BASE_PATH="./build"
+BUILD_FOLDER_CONTENT_PATH="${BUILD_FOLDER_BASE_PATH}/content"
 
-if [ -e "$BUILD_FOLDER_PATH" ]; then
-    rm -Rf $BUILD_FOLDER_PATH
+if [ -e "$BUILD_FOLDER_BASE_PATH" ]; then
+    rm -Rf $BUILD_FOLDER_BASE_PATH
 fi
 
-mkdir $BUILD_FOLDER_PATH
+mkdir -p $BUILD_FOLDER_CONTENT_PATH
 
-cp -Rf app $BUILD_FOLDER_PATH/app
-cp -Rf tmpl $BUILD_FOLDER_PATH/tmpl
-cp -f __init__.py $BUILD_FOLDER_PATH
-cp -f install.sh $BUILD_FOLDER_PATH
-cp -f uninstall.sh $BUILD_FOLDER_PATH
-cp -f katoolin.py $BUILD_FOLDER_PATH
-cp -f LICENCE $BUILD_FOLDER_PATH
-cp -f README.md $BUILD_FOLDER_PATH
-
+cp -Rf katlib $BUILD_FOLDER_CONTENT_PATH/katlib
+cp -Rf tmpl $BUILD_FOLDER_CONTENT_PATH/tmpl
+cp -f __init__.py $BUILD_FOLDER_CONTENT_PATH
+cp -f install.sh $BUILD_FOLDER_CONTENT_PATH
+cp -f uninstall.sh $BUILD_FOLDER_CONTENT_PATH
+cp -f katoolin.py $BUILD_FOLDER_CONTENT_PATH
+cp -f LICENCE $BUILD_FOLDER_CONTENT_PATH
+cp -f README.md $BUILD_FOLDER_CONTENT_PATH
