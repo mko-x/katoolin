@@ -1,9 +1,13 @@
 #!/usr/bin/python2.7
+debug = 0
 import os
 import os.path
 import sys, traceback
 
-sys.path.insert(0, './app')
+if debug != 0:
+	sys.path.insert(0, './katlib')	
+
+sys.path.insert(0, '/usr/bin/katlib')
 
 from ui import UI
 
