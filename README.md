@@ -6,10 +6,11 @@ Command line interface (CLI) to install Kali Linux Tools in your desired distrib
 Provide Kali Linux Tools to other linux distributions.
 
 # Quickstart
+Execute this in CLI/Terminal to install and run katoolin
 ```bash
 mkdir ~/_katemp && cd ~/_katemp && \
 wget https://git.io/fhxF5 -O katoolin.zip && unzip katoolin.zip && sudo ./install.sh && \
-cd ~/ && rm -rf ~/_katemp
+cd ~/ && rm -rf ~/_katemp && katoolin
 ```
 
 # Features
