@@ -5,6 +5,8 @@ Command line interface (CLI) to install Kali Linux Tools in your desired distrib
 # Quickstart
 ## Python
 Ensure you have Python 2.x installed as this tool is written in Python. ([python.org/downloads](https://www.python.org/downloads/))
+The installer will try to setup python if not found, you should ensure it succeeds.
+
 ## Install
 Execute this in CLI/Terminal to install and run katoolin
 ```bash
@@ -46,6 +48,7 @@ The following tasks can be executed in setup menu:
 # Installation
 ## Python
 Ensure you have Python 2.x installed as this tool is written in Python. ([python.org/downloads](https://www.python.org/downloads/))
+The installer will try to setup python if not found, you should ensure it succeeds.
 ## Bash
 ```bash
 wget https://git.io/fhxF5 -O katoolin.zip
