@@ -13,6 +13,11 @@ mkdir ~/_katemp && cd ~/_katemp && \
 wget https://git.io/fjf6m -O katoolin.zip && unzip katoolin.zip && sudo ./install.sh && \
 cd ~/ && rm -rf ~/_katemp
 ```
+## Run
+Call this in some CLi:
+```bash
+$ katoolin
+```
 
 # Features
 - Install script
