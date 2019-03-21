@@ -1,15 +1,18 @@
 #!/usr/bin/python2.7
-debug = 0
+
 import os
 import os.path
 import sys, traceback
 
-if debug != 0:
-	sys.path.insert(0, './katlib')	
+if "kDEBUG" in os.environ:
+	debug = int(os.environ['kDEBUG'])
 
 sys.path.insert(0, '/usr/bin/katlib')
 
-from ui import UI
+if debug:
+	sys.path.insert(0, './katlib')	
+
+from katlib.ui import UI
 
 ui = UI()
 
@@ -28,6 +31,8 @@ constants = {
 	"pathToSourcesList": "/etc/apt/sources.list.d/kali.list"
 }
 
+cmdInstall = "apt-get install -y "
+
 # method 1
 def reposAdd():
 	print ('Fetching key')
@@ -39,22 +44,19 @@ def reposAdd():
 	else:
 		cmd10 = os.system("cp ./tmpl/kali.list " + constants["pathToSourcesList"])
 		print('Added sources repo')
-		#cmd9 = os.system("echo '# Kali linux repositories | Added by Katoolin\ndeb https://archive.kali.org/kali kali-rolling main contrib non-free' >> /etc/apt/sources.list")
 
 # method 2
 def updateAptGet():
 	cmd20 = os.system("apt-get update")
-	# add-apt-repository 'http://http.kali.org/kali kali-rolling main contrib non-free' && 
-	cmd21 = os.system("apt-get install -y software-properties-common && apt-get update -m")
-	# not yet
-	# cmd5 = os.system("apt-get install -y software-properties-common && add-apt-repository ppa:apt-fast/stable && apt-get update && apt-get install -y aria2 apt-fast")
-	# rmcmd5 = add-apt-repository --remove "ppa:apt-fast/stable"
+	cmd21 = os.system("${cmdInstall} -y software-properties-common && apt-get update -m")
+	if "Ubuntu" in os.name or "Debian" in os.name:
+		cmd5 = os.system("add-apt-repository ppa:apt-fast/stable && apt-get update && apt-get install -y aria2 apt-fast")
 
 # method 3
 def removeData():
 	cmd30 = os.system("rm " + constants["pathToSourcesList"] + " && apt-get autoclean -y && apt-get update")
-	# not yet
-	# cmd11 = os.system("apt-get --purge autoremove aria2 apt-fast")
+	if "Ubuntu" in os.name or "Debian" in os.name:
+		cmd11 = os.system("apt-get --purge autoremove aria2 apt-fast")
 	print ("\033[1;31m\nAll kali linux repositories have been deleted !\n\033[1;m")
 
 # method 4
@@ -68,13 +70,15 @@ def showSources():
 
 def main():
 	try:
+		if "Ubuntu" in os.name or "Debian" in os.name:
+			cmdInstall = "apt-fast install -y "
 		ui.printBanner()
 		def enterMainMenu():
 			while True:
 				ui.printMainMenu()
 
 				choiceMainMenu = raw_input("\033[1;36mkat > \033[1;m")
-			
+
 				while choiceMainMenu == "1":
 					ui.printSourcesMenu()
 					repo = raw_input("\033[1;32mWhat do you want to do ?> \033[1;m")
@@ -106,9 +110,9 @@ def main():
 						elif choiceCategoryMenu == "gohome":
 							enterMainMenu()
 						elif choiceCategoryMenu == "0":
-							cmd = os.system("apt-get -f -y -qq install acccheck ace-voip amap automater braa casefile cdpsnarf cisco-torch cookie-cadger copy-router-config dmitry dnmap dnsenum dnsmap dnsrecon dnstracer dnswalk dotdotpwn enum4linux enumiax exploitdb fierce firewalk fragroute fragrouter ghost-phisher golismero goofile lbd maltego-teeth masscan metagoofil miranda nmap p0f parsero recon-ng set smtp-user-enum snmpcheck sslcaudit sslsplit sslstrip sslyze thc-ipv6 theharvester tlssled twofi urlcrazy wireshark wol-e xplico ismtp intrace hping3 bbqsql bed cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch copy-router-config doona dotdotpwn greenbone-security-assistant hexorbase jsql lynis nmap ohrwurm openvas-cli openvas-manager openvas-scanner oscanner powerfuzzer sfuzz sidguesser siparmyknife sqlmap sqlninja sqlsus thc-ipv6 tnscmd10g unix-privesc-check yersinia aircrack-ng asleap bluelog blueranger bluesnarfer bully cowpatty crackle eapmd5pass fern-wifi-cracker ghost-phisher giskismet kalibrate-rtl killerbee kismet mdk3 mfcuk mfoc mfterm multimon-ng pixiewps reaver redfang spooftooph wifi-honey wifitap wifite apache-users arachni bbqsql blindelephant burpsuite cutycapt davtest deblaze dirb dirbuster fimap funkload grabber jboss-autopwn joomscan jsql maltego-teeth padbuster paros parsero plecost powerfuzzer proxystrike recon-ng skipfish sqlmap sqlninja sqlsus ua-tester uniscan webscarab websploit wfuzz wpscan xsser burpsuite dnschef fiked hamster-sidejack hexinject iaxflood inviteflood ismtp mitmproxy ohrwurm protos-sip rebind responder rtpbreak rtpinsertsound rtpmixsound sctpscan siparmyknife sipp sipvicious sniffjoke sslsplit sslstrip thc-ipv6 voiphopper webscarab wifi-honey wireshark xspy yersinia zaproxy cryptcat cymothoa dbd httptunnel intersect nishang polenum powersploit pwnat ridenum sbd u3-pwn webshells weevely casefile cutycapt dos2unix dradis keepnote metagoofil nipper-ng pipal armitage backdoor-factory cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch crackle jboss-autopwn linux-exploit-suggester maltego-teeth set shellnoob sqlmap thc-ipv6 yersinia beef-xss binwalk bulk-extractor chntpw cuckoo dc3dd ddrescue dumpzilla extundelete foremost galleta guymager p0f pdf-parser pdfid pdgmail peepdf volatility xplico dhcpig funkload iaxflood inviteflood ipv6-toolkit mdk3 reaver rtpflood slowhttptest t50 termineter thc-ipv6 thc-ssl-dos acccheck burpsuite cewl chntpw cisco-auditing-tool cmospwd creddump crunch findmyhash gpp-decrypt hash-identifier hexorbase john johnny keimpx maltego-teeth maskprocessor multiforcer ncrack oclgausscrack pack patator polenum rainbowcrack rcracki-mt rsmangler statsprocessor thc-pptp-bruter truecrack webscarab wordlists zaproxy apktool dex2jar python-distorm3 edb-debugger jad javasnoop jd ollydbg smali valgrind yara android-sdk apktool arduino dex2jar sakis3g smali && wget http://www.morningstarsecurity.com/downloads/bing-ip2hosts-0.4.tar.gz && tar -xzvf bing-ip2hosts-0.4.tar.gz && cp bing-ip2hosts-0.4/bing-ip2hosts /usr/local/bin/ && rm -Rf ./bing-ip2hosts-0.4*")	
+							cmd = os.system("${cmdInstall} -qq install acccheck ace-voip amap automater braa casefile cdpsnarf cisco-torch cookie-cadger copy-router-config dmitry dnmap dnsenum dnsmap dnsrecon dnstracer dnswalk dotdotpwn enum4linux enumiax exploitdb fierce firewalk fragroute fragrouter ghost-phisher golismero goofile lbd maltego-teeth masscan metagoofil miranda nmap p0f parsero recon-ng set smtp-user-enum snmpcheck sslcaudit sslsplit sslstrip sslyze thc-ipv6 theharvester tlssled twofi urlcrazy wireshark wol-e xplico ismtp intrace hping3 bbqsql bed cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch copy-router-config doona dotdotpwn greenbone-security-assistant hexorbase jsql lynis nmap ohrwurm openvas-cli openvas-manager openvas-scanner oscanner powerfuzzer sfuzz sidguesser siparmyknife sqlmap sqlninja sqlsus thc-ipv6 tnscmd10g unix-privesc-check yersinia aircrack-ng asleap bluelog blueranger bluesnarfer bully cowpatty crackle eapmd5pass fern-wifi-cracker ghost-phisher giskismet kalibrate-rtl killerbee kismet mdk3 mfcuk mfoc mfterm multimon-ng pixiewps reaver redfang spooftooph wifi-honey wifitap wifite apache-users arachni bbqsql blindelephant burpsuite cutycapt davtest deblaze dirb dirbuster fimap funkload grabber jboss-autopwn joomscan jsql maltego-teeth padbuster paros parsero plecost powerfuzzer proxystrike recon-ng skipfish sqlmap sqlninja sqlsus ua-tester uniscan webscarab websploit wfuzz wpscan xsser burpsuite dnschef fiked hamster-sidejack hexinject iaxflood inviteflood ismtp mitmproxy ohrwurm protos-sip rebind responder rtpbreak rtpinsertsound rtpmixsound sctpscan siparmyknife sipp sipvicious sniffjoke sslsplit sslstrip thc-ipv6 voiphopper webscarab wifi-honey wireshark xspy yersinia cryptcat cymothoa dbd httptunnel intersect nishang polenum powersploit pwnat ridenum sbd u3-pwn webshells weevely casefile cutycapt dos2unix dradis keepnote metagoofil nipper-ng pipal armitage backdoor-factory cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch crackle jboss-autopwn linux-exploit-suggester maltego-teeth set shellnoob sqlmap thc-ipv6 yersinia beef-xss binwalk bulk-extractor chntpw cuckoo dc3dd ddrescue dumpzilla extundelete foremost galleta guymager p0f pdf-parser pdfid pdgmail peepdf volatility xplico dhcpig funkload iaxflood inviteflood ipv6-toolkit mdk3 reaver rtpflood slowhttptest t50 termineter thc-ipv6 thc-ssl-dos acccheck burpsuite cewl chntpw cisco-auditing-tool cmospwd creddump crunch findmyhash gpp-decrypt hash-identifier hexorbase john johnny keimpx maltego-teeth maskprocessor multiforcer ncrack oclgausscrack pack patator polenum rainbowcrack rcracki-mt rsmangler statsprocessor thc-pptp-bruter truecrack webscarab wordlists apktool dex2jar python-distorm3 edb-debugger jad javasnoop jd ollydbg smali valgrind yara android-sdk apktool arduino dex2jar sakis3g smali && wget http://www.morningstarsecurity.com/downloads/bing-ip2hosts-0.4.tar.gz && tar -xzvf bing-ip2hosts-0.4.tar.gz && cp bing-ip2hosts-0.4/bing-ip2hosts /usr/local/bin/ && rm -Rf ./bing-ip2hosts-0.4*")	
 							if "Ubuntu" in os.name:
-								cmd3 = os.system("snap install zaproxy")
+								cmd3 = os.system("snap install zaproxy --classic")
 							else:
 								cmd3 = os.system("apt-get -f install zaproxy")
 						while choiceCategoryMenu == "1":
@@ -235,7 +239,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()		
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y acccheck ace-voip amap automater braa casefile cdpsnarf cisco-torch cookie-cadger copy-router-config dmitry dnmap dnsenum dnsmap dnsrecon dnstracer dnswalk dotdotpwn enum4linux enumiax exploitdb fierce firewalk fragroute fragrouter ghost-phisher golismero goofile lbd maltego-teeth masscan metagoofil miranda nmap p0f parsero recon-ng set smtp-user-enum snmpcheck sslcaudit sslsplit sslstrip sslyze thc-ipv6 theharvester tlssled twofi urlcrazy wireshark wol-e xplico ismtp intrace hping3 && wget http://www.morningstarsecurity.com/downloads/bing-ip2hosts-0.4.tar.gz && tar -xzvf bing-ip2hosts-0.4.tar.gz && cp bing-ip2hosts-0.4/bing-ip2hosts /usr/local/bin/")				
+								cmd = os.system("${cmdInstall} acccheck ace-voip amap automater braa casefile cdpsnarf cisco-torch cookie-cadger copy-router-config dmitry dnmap dnsenum dnsmap dnsrecon dnstracer dnswalk dotdotpwn enum4linux enumiax exploitdb fierce firewalk fragroute fragrouter ghost-phisher golismero goofile lbd maltego-teeth masscan metagoofil miranda nmap p0f parsero recon-ng set smtp-user-enum snmpcheck sslcaudit sslsplit sslstrip sslyze thc-ipv6 theharvester tlssled twofi urlcrazy wireshark wol-e xplico ismtp intrace hping3 && wget http://www.morningstarsecurity.com/downloads/bing-ip2hosts-0.4.tar.gz && tar -xzvf bing-ip2hosts-0.4.tar.gz && cp bing-ip2hosts-0.4/bing-ip2hosts /usr/local/bin/")				
 							else:
 								print ("\033[1;31mSorry, that was an invalid command!\033[1;m")
 
@@ -319,7 +323,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()						
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y bbqsql bed cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch copy-router-config doona dotdotpwn greenbone-security-assistant hexorbase jsql lynis nmap ohrwurm openvas-cli openvas-manager openvas-scanner oscanner powerfuzzer sfuzz sidguesser siparmyknife sqlmap sqlninja sqlsus thc-ipv6 tnscmd10g unix-privesc-check yersinia")						
+								cmd = os.system("${cmdInstall} bbqsql bed cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch copy-router-config doona dotdotpwn greenbone-security-assistant hexorbase jsql lynis nmap ohrwurm openvas-cli openvas-manager openvas-scanner oscanner powerfuzzer sfuzz sidguesser siparmyknife sqlmap sqlninja sqlsus thc-ipv6 tnscmd10g unix-privesc-check yersinia")						
 							else:
 								ui.printErrorInvalidCommand()
 								#print ("\033[1;31mSorry, that was an invalid command!\033[1;m")
@@ -392,13 +396,14 @@ def main():
 							elif choiceSubCategory == "32":
 								cmd = os.system("apt-get install wifite")
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y aircrack-ng asleap bluelog blueranger bluesnarfer bully cowpatty crackle eapmd5pass fern-wifi-cracker ghost-phisher giskismet gqrx kalibrate-rtl killerbee kismet mdk3 mfcuk mfoc mfterm multimon-ng pixiewps reaver redfang spooftooph wifi-honey wifitap wifite")
+								cmd = os.system("${cmdInstall} aircrack-ng asleap bluelog blueranger bluesnarfer bully cowpatty crackle eapmd5pass fern-wifi-cracker ghost-phisher giskismet gqrx kalibrate-rtl killerbee kismet mdk3 mfcuk mfoc mfterm multimon-ng pixiewps reaver redfang spooftooph wifi-honey wifitap wifite")
 							elif choiceSubCategory == "back":
 								enterCategoryMenu()
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()						
 							else:
 								ui.printErrorInvalidCommand()
+
 						while choiceCategoryMenu == "4":
 							ui.printCategoryWebApps()
 							choiceSubCategory = raw_input("\033[1;36mkat > \033[1;m")
@@ -487,13 +492,20 @@ def main():
 							elif choiceSubCategory == "40":
 								cmd = os.system("apt-get install xsser")
 							elif choiceSubCategory == "41":
-								cmd = os.system("apt-get install zaproxy")										
+								if "Ubuntu" in os.name:
+									cmd = os.system("snap install zaproxy --classic")
+								else:
+									cmd = os.system("apt-get install zaproxy")
 							elif choiceSubCategory == "back":
 								enterCategoryMenu()
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()	
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y apache-users arachni bbqsql blindelephant burpsuite cutycapt davtest deblaze dirb dirbuster fimap funkload grabber jboss-autopwn joomscan jsql maltego-teeth padbuster paros parsero plecost powerfuzzer proxystrike recon-ng skipfish sqlmap sqlninja sqlsus ua-tester uniscan webscarab websploit wfuzz wpscan xsser zaproxy")												
+								cmd = os.system("${cmdInstall} apache-users arachni bbqsql blindelephant burpsuite cutycapt davtest deblaze dirb dirbuster fimap funkload grabber jboss-autopwn joomscan jsql maltego-teeth padbuster paros parsero plecost powerfuzzer proxystrike recon-ng skipfish sqlmap sqlninja sqlsus ua-tester uniscan webscarab websploit wfuzz wpscan xsser")												
+								if "Ubuntu" in os.name:
+									cmd = os.system("snap install zaproxy --classic")
+								else:
+									cmd = os.system("apt-get install -y zaproxy")
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -563,13 +575,16 @@ def main():
 							elif choiceSubCategory == "31":
 								cmd = os.system("apt-get install yersinia")
 							elif choiceSubCategory == "32":
-								cmd = os.system("apt-get install zaproxy")
+								if "Ubuntu" in os.name:
+									cmd = os.system("snap install zaproxy --classic")
+								else:
+									cmd = os.system("apt-get install zaproxy")
 							elif choiceSubCategory == "back":
 								enterCategoryMenu()
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y burpsuite dnschef fiked hamster-sidejack hexinject iaxflood inviteflood ismtp mitmproxy ohrwurm protos-sip rebind responder rtpbreak rtpinsertsound rtpmixsound sctpscan siparmyknife sipp sipvicious sniffjoke sslsplit sslstrip thc-ipv6 voiphopper webscarab wifi-honey wireshark xspy yersinia zaproxy")  
+								cmd = os.system("${cmdInstall} burpsuite dnschef fiked hamster-sidejack hexinject iaxflood inviteflood ismtp mitmproxy ohrwurm protos-sip rebind responder rtpbreak rtpinsertsound rtpmixsound sctpscan siparmyknife sipp sipvicious sniffjoke sslsplit sslstrip thc-ipv6 voiphopper webscarab wifi-honey wireshark xspy yersinia")  
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -613,7 +628,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()   
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y cryptcat cymothoa dbd dns2tcp httptunnel intersect nishang polenum powersploit pwnat ridenum sbd u3-pwn webshells weevely")
+								cmd = os.system("${cmdInstall} cryptcat cymothoa dbd dns2tcp httptunnel intersect nishang polenum powersploit pwnat ridenum sbd u3-pwn webshells weevely")
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -646,7 +661,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()   
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y casefile cutycapt dos2unix dradis keepnote metagoofil nipper-ng pipal")  
+								cmd = os.system("${cmdInstall} casefile cutycapt dos2unix dradis keepnote metagoofil nipper-ng pipal")  
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -692,7 +707,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()   
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y armitage backdoor-factory cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch crackle jboss-autopwn linux-exploit-suggester maltego-teeth set shellnoob sqlmap thc-ipv6 yersinia beef-xss")  						
+								cmd = os.system("${cmdInstall} armitage backdoor-factory cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch crackle jboss-autopwn linux-exploit-suggester maltego-teeth set shellnoob sqlmap thc-ipv6 yersinia beef-xss")  						
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -748,7 +763,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()   
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y binwalk bulk-extractor chntpw cuckoo dc3dd ddrescue dumpzilla extundelete foremost galleta guymager iphone-backup-analyzer p0f pdf-parser pdfid pdgmail peepdf volatility xplico")						
+								cmd = os.system("${cmdInstall} binwalk bulk-extractor chntpw cuckoo dc3dd ddrescue dumpzilla extundelete foremost galleta guymager iphone-backup-analyzer p0f pdf-parser pdfid pdgmail peepdf volatility xplico")						
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -788,7 +803,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()   
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y dhcpig funkload iaxflood inviteflood ipv6-toolkit mdk3 reaver rtpflood slowhttptest t50 termineter thc-ipv6 thc-ssl-dos")
+								cmd = os.system("${cmdInstall} dhcpig funkload iaxflood inviteflood ipv6-toolkit mdk3 reaver rtpflood slowhttptest t50 termineter thc-ipv6 thc-ssl-dos")
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -866,13 +881,16 @@ def main():
 							elif choiceSubCategory == "35":
 								cmd = os.system("apt-get install wordlists")
 							elif choiceSubCategory == "36":
-								cmd = os.system("apt-get install zaproxy")
+								if "Ubuntu" in os.name:
+									cmd = os.system("snap install zaproxy --classic")
+								else:
+									cmd = os.system("apt-get install zaproxy")
 							elif choiceSubCategory == "back":
 								enterCategoryMenu()
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()   
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y acccheck burpsuite cewl chntpw cisco-auditing-tool cmospwd creddump crunch findmyhash gpp-decrypt hash-identifier hexorbase john johnny keimpx maltego-teeth maskprocessor multiforcer ncrack oclgausscrack pack patator polenum rainbowcrack rcracki-mt rsmangler statsprocessor thc-pptp-bruter truecrack webscarab wordlists zaproxy")
+								cmd = os.system("${cmdInstall} acccheck burpsuite cewl chntpw cisco-auditing-tool cmospwd creddump crunch findmyhash gpp-decrypt hash-identifier hexorbase john johnny keimpx maltego-teeth maskprocessor multiforcer ncrack oclgausscrack pack patator polenum rainbowcrack rcracki-mt rsmangler statsprocessor thc-pptp-bruter truecrack webscarab wordlists")
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -911,7 +929,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()   
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y apktool dex2jar edb-debugger jad javasnoop smali")
+								cmd = os.system("${cmdInstall} apktool dex2jar edb-debugger jad javasnoop smali")
 							else:
 								ui.printErrorInvalidCommand()
 
@@ -935,7 +953,7 @@ def main():
 							elif choiceSubCategory == "gohome":
 								enterMainMenu()   
 							elif choiceSubCategory == "0":
-								cmd = os.system("apt-get install -y android-sdk apktool arduino dex2jar sakis3g smali")
+								cmd = os.system("${cmdInstall} android-sdk apktool arduino dex2jar sakis3g smali")
 							else:
 								ui.printErrorInvalidCommand()
 								
@@ -951,7 +969,7 @@ def main():
 							elif choiceSubCategory == "R":
 								repo = raw_input("\033[1;32mDo you want to install classicmenu indicator ? [y/n]> \033[1;m")
 								if repo == "y":
-									cmd = os.system("apt-get --purge --allow-downgrades --allow-remove-essential --allow-change-held-packages -qq autoremove acccheck ace-voip amap automater braa casefile cdpsnarf cisco-torch cookie-cadger copy-router-config dmitry dnmap dnsenum dnsmap dnsrecon dnstracer dnswalk dotdotpwn enum4linux enumiax exploitdb fierce firewalk fragroute fragrouter ghost-phisher golismero goofile lbd maltego-teeth masscan metagoofil miranda nmap p0f parsero recon-ng set smtp-user-enum snmpcheck sslcaudit sslsplit sslstrip sslyze thc-ipv6 theharvester tlssled twofi urlcrazy wireshark wol-e xplico ismtp intrace hping3 bbqsql bed cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch copy-router-config doona dotdotpwn greenbone-security-assistant hexorbase jsql lynis nmap ohrwurm openvas-cli openvas-manager openvas-scanner oscanner powerfuzzer sfuzz sidguesser siparmyknife sqlmap sqlninja sqlsus thc-ipv6 tnscmd10g unix-privesc-check yersinia aircrack-ng asleap bluelog blueranger bluesnarfer bully cowpatty crackle eapmd5pass fern-wifi-cracker ghost-phisher giskismet gqrx kalibrate-rtl killerbee kismet mdk3 mfcuk mfoc mfterm multimon-ng pixiewps reaver redfang spooftooph wifi-honey wifitap wifite apache-users arachni bbqsql blindelephant burpsuite cutycapt davtest deblaze dirb dirbuster fimap funkload grabber jboss-autopwn joomscan jsql maltego-teeth padbuster paros parsero plecost powerfuzzer proxystrike recon-ng skipfish sqlmap sqlninja sqlsus ua-tester uniscan vega w3af webscarab websploit wfuzz wpscan xsser zaproxy burpsuite dnschef fiked hamster-sidejack hexinject iaxflood inviteflood ismtp mitmproxy ohrwurm protos-sip rebind responder rtpbreak rtpinsertsound rtpmixsound sctpscan siparmyknife sipp sipvicious sniffjoke sslsplit sslstrip thc-ipv6 voiphopper webscarab wifi-honey wireshark xspy yersinia zaproxy cryptcat cymothoa dbd dns2tcp http-tunnel httptunnel intersect nishang polenum powersploit pwnat ridenum sbd u3-pwn webshells weevely casefile cutycapt dos2unix dradis keepnote magictree metagoofil nipper-ng pipal armitage backdoor-factory cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch crackle jboss-autopwn linux-exploit-suggester maltego-teeth set shellnoob sqlmap thc-ipv6 yersinia beef-xss binwalk bulk-extractor chntpw cuckoo dc3dd ddrescue dumpzilla extundelete foremost galleta guymager iphone-backup-analyzer p0f pdf-parser pdfid pdgmail peepdf volatility xplico dhcpig funkload iaxflood inviteflood ipv6-toolkit mdk3 reaver rtpflood slowhttptest t50 termineter thc-ipv6 thc-ssl-dos acccheck burpsuite cewl chntpw cisco-auditing-tool cmospwd creddump crunch findmyhash gpp-decrypt hash-identifier hexorbase john johnny keimpx maltego-teeth maskprocessor multiforcer ncrack oclgausscrack pack patator polenum rainbowcrack rcracki-mt rsmangler statsprocessor thc-pptp-bruter truecrack webscarab wordlists zaproxy apktool dex2jar python-distorm3 edb-debugger jad javasnoop jd ollydbg smali valgrind yara android-sdk apktool arduino dex2jar sakis3g smali && wget http://www.morningstarsecurity.com/downloads/bing-ip2hosts-0.4.tar.gz && tar -xzvf bing-ip2hosts-0.4.tar.gz && cp bing-ip2hosts-0.4/bing-ip2hosts /usr/local/bin/ && rm -Rf bing-ip2hosts-0.*")	
+									cmd = os.system("apt-get --purge --allow-downgrades --allow-remove-essential --allow-change-held-packages -qq autoremove acccheck ace-voip amap automater braa casefile cdpsnarf cisco-torch cookie-cadger copy-router-config dmitry dnmap dnsenum dnsmap dnsrecon dnstracer dnswalk dotdotpwn enum4linux enumiax exploitdb fierce firewalk fragroute fragrouter ghost-phisher golismero goofile lbd maltego-teeth masscan metagoofil miranda nmap p0f parsero recon-ng set smtp-user-enum snmpcheck sslcaudit sslsplit sslstrip sslyze thc-ipv6 theharvester tlssled twofi urlcrazy wireshark wol-e xplico ismtp intrace hping3 bbqsql bed cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch copy-router-config doona dotdotpwn greenbone-security-assistant hexorbase jsql lynis nmap ohrwurm openvas-cli openvas-manager openvas-scanner oscanner powerfuzzer sfuzz sidguesser siparmyknife sqlmap sqlninja sqlsus thc-ipv6 tnscmd10g unix-privesc-check yersinia aircrack-ng asleap bluelog blueranger bluesnarfer bully cowpatty crackle eapmd5pass fern-wifi-cracker ghost-phisher giskismet gqrx kalibrate-rtl killerbee kismet mdk3 mfcuk mfoc mfterm multimon-ng pixiewps reaver redfang spooftooph wifi-honey wifitap wifite apache-users arachni bbqsql blindelephant burpsuite cutycapt davtest deblaze dirb dirbuster fimap funkload grabber jboss-autopwn joomscan jsql maltego-teeth padbuster paros parsero plecost powerfuzzer proxystrike recon-ng skipfish sqlmap sqlninja sqlsus ua-tester uniscan vega w3af webscarab websploit wfuzz wpscan xsser burpsuite dnschef fiked hamster-sidejack hexinject iaxflood inviteflood ismtp mitmproxy ohrwurm protos-sip rebind responder rtpbreak rtpinsertsound rtpmixsound sctpscan siparmyknife sipp sipvicious sniffjoke sslsplit sslstrip thc-ipv6 voiphopper webscarab wifi-honey wireshark xspy yersinia cryptcat cymothoa dbd dns2tcp http-tunnel httptunnel intersect nishang polenum powersploit pwnat ridenum sbd u3-pwn webshells weevely casefile cutycapt dos2unix dradis keepnote magictree metagoofil nipper-ng pipal armitage backdoor-factory cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch crackle jboss-autopwn linux-exploit-suggester maltego-teeth set shellnoob sqlmap thc-ipv6 yersinia beef-xss binwalk bulk-extractor chntpw cuckoo dc3dd ddrescue dumpzilla extundelete foremost galleta guymager iphone-backup-analyzer p0f pdf-parser pdfid pdgmail peepdf volatility xplico dhcpig funkload iaxflood inviteflood ipv6-toolkit mdk3 reaver rtpflood slowhttptest t50 termineter thc-ipv6 thc-ssl-dos acccheck burpsuite cewl chntpw cisco-auditing-tool cmospwd creddump crunch findmyhash gpp-decrypt hash-identifier hexorbase john johnny keimpx maltego-teeth maskprocessor multiforcer ncrack oclgausscrack pack patator polenum rainbowcrack rcracki-mt rsmangler statsprocessor thc-pptp-bruter truecrack webscarab wordlists apktool dex2jar python-distorm3 edb-debugger jad javasnoop jd ollydbg smali valgrind yara android-sdk apktool arduino dex2jar sakis3g smali && wget http://www.morningstarsecurity.com/downloads/bing-ip2hosts-0.4.tar.gz && tar -xzvf bing-ip2hosts-0.4.tar.gz && cp bing-ip2hosts-0.4/bing-ip2hosts /usr/local/bin/ && rm -Rf bing-ip2hosts-0.*")	
 									cmd21 = os.system("apt-get autoclean && apt-get clean")
 							elif choiceSubCategory == "back":
 								enterCategoryMenu()

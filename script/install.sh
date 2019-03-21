@@ -83,10 +83,17 @@ apt-get -qq --purge autoremove -y
 echo "Python install ensured"
 
 echo "Installation of katoolin started..."
-rm -rf /usr/bin/katoolin*
-cp ./katoolin.py /usr/bin/katoolin
-cp -R ./katlib /usr/bin/katlib
+echo "Removing old stuff"
+rm -rf /usr/bin/katoolin
+rm -rf /usr/bin/katlib
+
+echo "Copying new stuff"
+cp ../src/katoolin.py /usr/bin/katoolin
+cp -R ../src/katlib /usr/bin/katlib
+
+echo "Fit permissions"
 chmod +x /usr/bin/katoolin
 chmod -R +x /usr/bin/katlib
-echo "Installation of katoolin finished!"
+
+echo "... Installation of katoolin finished!"
 echo "Run katoolin just from the commandline e.g. by calling 'sudo katoolin'"

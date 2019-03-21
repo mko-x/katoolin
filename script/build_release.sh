@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-BUILD_FOLDER_BASE_PATH="./build"
+BUILD_FOLDER_BASE_PATH="../build"
 
 if [ -e "$BUILD_FOLDER_BASE_PATH" ]; then
     rm -Rf $BUILD_FOLDER_BASE_PATH

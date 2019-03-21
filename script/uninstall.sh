@@ -9,6 +9,7 @@ fi
 
 echo "uninstall:rm katoolin" 
 rm -f /usr/bin/katoolin
+rm -Rf /usr/bin/katlib
 
 echo "uninstall:autoremove"
 apt-get -qq --purge autoremove -y
