@@ -4,11 +4,11 @@ Command line interface (CLI) to install Kali Linux Tools in your desired distrib
 
 # Quickstart
 ## Python
-Ensure you have Python 2.x installed as this tool is written in Python. ([python.org/downloads](https://www.python.org/downloads/))
 The installer will try to setup python if not found, you should ensure it succeeds.
+Ensure you have Python 2.x installed as this tool is written in Python. ([python.org/downloads](https://www.python.org/downloads/))
 
 ## Install
-Execute this in CLI/Terminal to install and run katoolin
+Execute this in CLI/Terminal to install and run katoolin in few lines
 ```bash
 mkdir ~/_katemp && cd ~/_katemp && \
 wget https://git.io/fhxF5 -O katoolin.zip && unzip katoolin.zip && sudo ./install.sh && \
@@ -23,8 +23,8 @@ cd ~/ && rm -rf ~/_katemp && katoolin
 
 # HowTo
 ## Operating System
-Pick your preferred operating system you want to deal with.
-The katoolin toolset and setup-helper is versatile and tries to fit all your needs.
+Pick your preferred linux operating system you want to deal with.
+The katoolin toolset and setup-helper are versatile and try to fit all your needs.
 
 ## Tested
 - Ubuntu 18.04 (native and vbox)
