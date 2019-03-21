@@ -1,3 +1,16 @@
+# NO LONGER MAINTAINED - DEPRECATED/ARCHIVED
+
+##1
+Katoolin is based on hardcoded text representation of the different available tools, keeping that up to date by hand is a horrible and boring job.
+
+##2
+There are other tools providing installations of kali linux tools like [Tool-X](https://github.com/Rajkumrdusad/Tool-X).
+
+##3
+There will never be a situation where you need all of the kali linux tools at once. In the end only a small subset is necessary for penetration testing or analysis etc.
+
+So you can just get the tools from kali itself from [kali.org/tools-listing](https://tools.kali.org/tools-listing
+
 # katoolin 
 ![katoolinv2](https://user-images.githubusercontent.com/10264942/54731464-a1975700-4b8e-11e9-99f1-547bbf60f16a.png)
 
