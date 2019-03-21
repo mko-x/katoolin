@@ -3,16 +3,13 @@
 Command line interface (CLI) to install Kali Linux Tools in your desired distribution.
 
 # Quickstart
-## Python
-The installer will try to setup python if not found, you should ensure it succeeds.
-Ensure you have Python 2.x installed as this tool is written in Python. ([python.org/downloads](https://www.python.org/downloads/))
 
-## Install
-Execute this in CLI/Terminal to install and run katoolin in few lines
+## Quick install
+Execute this in CLI/Terminal to install katoolin:
 ```bash
 mkdir ~/_katemp && cd ~/_katemp && \
 wget https://git.io/fjf6m -O katoolin.zip && unzip katoolin.zip && sudo ./install.sh && \
-cd ~/ && rm -rf ~/_katemp && katoolin
+cd ~/ && rm -rf ~/_katemp
 ```
 
 # Features
@@ -32,28 +29,38 @@ The katoolin toolset and setup-helper are versatile and try to fit all your need
 - Linux Mint (vbox)
 - Raspbian (vbox created from PiDesktop release:2018-11-26 kernel:4.9)
 
-# Execution tasks
-## Install
+# Installation
+## Steps of katoolin install script
 The following tasks will be executed during install:
 - Os/Platform detection
 - Setting up required Python (stick to 2.7) if necessary
-- Adding/Overwriting katoolin as binary
+- Installing katoolin as globally available binary
+- HINT: Will override existing katoolin
 
-## Setup
-The following tasks can be executed in setup menu: 
-- Initialising trusted keys for Kalis repositories
-- Add Kali (rolling) repositories
-- Installs as global command 'katoolin'
+# Menu
+
+## Setup and manage Kali repos
+If you didn't use katoolin yet, you need to initialize Kali repos first
+- Fetching trusted keys for Kali's repositories
+- Add trusted Kali (rolling) repositories to aptitude
+and run katoolin in few lines
+
+## Start to install desired Kali tools
+The tools are sorted in categories dpending on their purposes.
+Choose what you want.
+Even install all at once, but be warned: That takes some time.
 
 # Installation
 ## Python
-Ensure you have Python 2.x installed as this tool is written in Python. ([python.org/downloads](https://www.python.org/downloads/))
-The installer will try to setup python if not found, you should ensure it succeeds.
+The installer will try several ways to setup python if not found, you should ensure it succeeds.
+Alternative: Install Python 2.x manually. Find it at ([python.org/downloads](https://www.python.org/downloads/))
 ## Bash
+Download, install and run katoolin within four steps:
 ```bash
 wget https://git.io/fjf6m -O katoolin.zip
 unzip katoolin.zip
 sudo ./install.sh
+katoolin
 ```
 
 # Usage
