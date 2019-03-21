@@ -1,5 +1,7 @@
-![katoolinv2](https://user-images.githubusercontent.com/10264942/53847666-deb9f180-3fb1-11e9-82fc-b7cba2fe6d4c.png)
 # katoolin 
+![katoolinv2](https://user-images.githubusercontent.com/10264942/54731464-a1975700-4b8e-11e9-99f1-547bbf60f16a.png)
+
+# About 
 Command line interface (CLI) to install Kali Linux Tools in your desired distribution.
 
 # Quickstart
