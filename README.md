@@ -11,7 +11,7 @@ Ensure you have Python 2.x installed as this tool is written in Python. ([python
 Execute this in CLI/Terminal to install and run katoolin in few lines
 ```bash
 mkdir ~/_katemp && cd ~/_katemp && \
-wget https://git.io/fhxF5 -O katoolin.zip && unzip katoolin.zip && sudo ./install.sh && \
+wget https://git.io/fjf6m -O katoolin.zip && unzip katoolin.zip && sudo ./install.sh && \
 cd ~/ && rm -rf ~/_katemp && katoolin
 ```
 
@@ -51,7 +51,7 @@ Ensure you have Python 2.x installed as this tool is written in Python. ([python
 The installer will try to setup python if not found, you should ensure it succeeds.
 ## Bash
 ```bash
-wget https://git.io/fhxF5 -O katoolin.zip
+wget https://git.io/fjf6m -O katoolin.zip
 unzip katoolin.zip
 sudo ./install.sh
 ```
